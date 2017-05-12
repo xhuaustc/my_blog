@@ -1,4 +1,4 @@
-{%- extends 'index.html' -%}
+{%- extends 'base_mb.html' -%}
 {%- block body -%}
 	{% if session.get('post-preview') %}
 		{% set post_title = session['post-preview'].get('title', None) %}
