@@ -47,5 +47,7 @@ def login_required():
                 flash('You must be logged in..', 'error')
                 return redirect(url_for('login'))
             return f(*args, **kwargs)
+
         return wrapped
+
     return wrapper

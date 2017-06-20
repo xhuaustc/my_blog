@@ -13,7 +13,6 @@ import pagination
 import settings
 from helper_functions import *
 
-
 app = Flask('FlaskBlog')
 md = Markdown(app)
 md.register_extension(GitHubGistExtension)
@@ -50,7 +49,8 @@ def single_post(permalink):
     post = postClass.get_post_by_permalink(permalink)
     if not post['data']:
         abort(404)
-    return render_template('single_post.html', post=post['data'], meta_title=app.config['BLOG_TITLE'] + '::' + post['data']['title'])
+    return render_template('single_post.html', post=post['data'],
+                           meta_title=app.config['BLOG_TITLE'] + '::' + post['data']['title'])
 
 
 @app.route('/q/<query>', defaults={'page': 1})
@@ -277,7 +277,7 @@ def save_user():
     if not post_data['email'] or not post_data['_id']:
         flash('Username and Email are required..', 'error')
         if post_data['update']:
-                return redirect(url_for('edit_user', id=post_data['_id']))
+            return redirect(url_for('edit_user', id=post_data['_id']))
         else:
             return redirect(url_for('add_user'))
     else:
@@ -452,6 +452,7 @@ app.jinja_env.globals['meta_description'] = app.config['BLOG_DESCRIPTION']
 if not app.config['DEBUG']:
     import logging
     from logging import FileHandler
+
     file_handler = FileHandler(app.config['LOG_FILE'])
     file_handler.setLevel(logging.WARNING)
     app.logger.addHandler(file_handler)

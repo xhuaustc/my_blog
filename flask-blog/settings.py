@@ -2,7 +2,6 @@ from flask import session
 
 
 class Settings:
-
     def __init__(self, default_config):
         self.collection = default_config['SETTINGS_COLLECTION']
 
@@ -115,6 +114,6 @@ class Settings:
                      'details': str(msg)}
 
             print error_color
-            print '\n\n---\nError type: %s in file: %s on line: %s\nError details: %s\n---\n\n'\
+            print '\n\n---\nError type: %s in file: %s on line: %s\nError details: %s\n---\n\n' \
                   % (error['type'], error['file'], error['line'], error['details'])
             print error_end

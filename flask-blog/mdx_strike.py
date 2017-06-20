@@ -9,4 +9,4 @@ class StrikeExtension(markdown.Extension):
 
 
 def makeExtension(configs=None):
-    return StrikeExtension(configs = configs)
+    return StrikeExtension(configs=configs)
