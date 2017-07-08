@@ -1,17 +1,19 @@
 import cgi
 import os
-from flask import Flask, render_template, abort, url_for, request, flash, session, redirect
+
+from flask import Flask, render_template, abort
 from flaskext.markdown import Markdown
-from mdx_github_gists import GitHubGistExtension
-from mdx_strike import StrikeExtension
-from mdx_quote import QuoteExtension
-from mdx_code_multiline import MultilineCodeExtension
 from werkzeug.contrib.atom import AtomFeed
-import post
-import user
+
 import pagination
+import post
 import settings
+import user
 from helper_functions import *
+from mdx_code_multiline import MultilineCodeExtension
+from mdx_github_gists import GitHubGistExtension
+from mdx_quote import QuoteExtension
+from mdx_strike import StrikeExtension
 
 app = Flask('FlaskBlog')
 md = Markdown(app)
@@ -49,6 +51,12 @@ def single_post(permalink):
     post = postClass.get_post_by_permalink(permalink)
     if not post['data']:
         abort(404)
+    import markdown
+    from flask import Markup
+    md = markdown.Markdown(extensions=['markdown.extensions.toc'])
+    post['data']['body_md'] = Markup(md.convert(post['data']['body'])).replace('&quot;', '')
+    post['data']['toc'] = Markup(md.toc)
+
     return render_template('single_post.html', post=post['data'],
                            meta_title=app.config['BLOG_TITLE'] + '::' + post['data']['title'])
 
