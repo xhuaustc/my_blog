@@ -1,19 +1,12 @@
 <head>
     <meta charset="utf-8">
-    <title>仁者无敌 | 勿以善小而不为，勿以恶小而不为</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="theme-color" content="#3F51B5">
-    <meta name="keywords" content="undefined">
-    <meta name="description" content="xsren写作的地方">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="仁者无敌">
-    <meta property="og:url" content="http://xsren.me/index.html">
-    <meta property="og:site_name" content="仁者无敌">
-    <meta property="og:description" content="xsren写作的地方">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="仁者无敌">
-    <meta name="twitter:description" content="xsren写作的地方">
-    <link rel="alternate" type="application/atom+xml" title="仁者无敌" href="/atom.xml">
+    {%- if default_settings -%}
+        {%- if post -%}
+            <title>{{post['title']}} | {{default_settings['BLOG_TITLE']}} | {{default_settings['BLOG_DESCRIPTION']}}</title>
+        {%- else -%}
+            <title>{{default_settings['BLOG_TITLE']}} | {{default_settings['BLOG_DESCRIPTION']}}</title>
+        {%- endif -%}
+    {%- endif -%}
     <link rel="shortcut icon" href="/static/img/favicon.ico">
     <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
 </head>

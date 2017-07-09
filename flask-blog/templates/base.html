@@ -4,16 +4,22 @@
 <body>
 <main id="main">
     <!-- nav -->
-    {%- block nav -%}{%- include 'nav.html' -%}{%- endblock -%}
+    {% if not post %}
+        {%- block nav -%}{%- include 'nav.html' -%}{%- endblock -%}
+    {% endif %}
     <!-- main -->
     {% block body %} {% endblock %}
     <!-- footer -->
     {%- include 'footer.html' -%}
 </main>
 
-<!-- 左侧边栏 -->
-<div id="loading" class="active"></div>
+<div id="loading" class="hide"></div>
+
+{% if post %}
+<aside id="menu" class="hide">
+{% else %}
 <aside id="menu">
+{% endif %}
     <div class="inner flex-row-vertical">
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
             <i class="icon icon-lg icon-close"></i>
@@ -111,6 +117,9 @@
         SHARE: true,
         REWARD: false
       };
+
+
+
 </script>
 <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
 <div class="search-panel" id="search-panel">

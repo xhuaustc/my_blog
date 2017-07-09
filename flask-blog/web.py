@@ -31,7 +31,8 @@ def index(page):
     posts = postClass.get_posts(int(app.config['PER_PAGE']), skip)
     count = postClass.get_total_count()
     pag = pagination.Pagination(page, app.config['PER_PAGE'], count)
-    return render_template('index.html', posts=posts['data'], pagination=pag, meta_title=app.config['BLOG_TITLE'])
+    return render_template('index.html', posts=posts['data'], pagination=pag, meta_title=app.config['BLOG_TITLE'],
+                           default_settings=app.config, )
 
 
 @app.route('/tag/<tag>', defaults={'page': 1})
@@ -56,8 +57,7 @@ def single_post(permalink):
     md = markdown.Markdown(extensions=['markdown.extensions.toc'])
     post['data']['body_md'] = Markup(md.convert(post['data']['body'])).replace('&quot;', '')
     post['data']['toc'] = Markup(md.toc)
-
-    return render_template('single_post.html', post=post['data'],
+    return render_template('single_post.html', post=post['data'], default_settings=app.config,
                            meta_title=app.config['BLOG_TITLE'] + '::' + post['data']['title'])
 
 
@@ -444,9 +444,12 @@ def set_globals():
 def page_not_found(error):
     return render_template('404.html', meta_title='404'), 404
 
+@app.template_filter('formatdate1')
+def format_datetime_filter1(input_value, format_="%Y-%m-%d"):
+    return input_value.strftime(format_)
 
 @app.template_filter('formatdate')
-def format_datetime_filter(input_value, format_="%a, %d %b %Y"):
+def format_datetime_filter(input_value, format_="%Y-%m-%d %H:%M:%S"):
     return input_value.strftime(format_)
 
 
