@@ -1,219 +1,216 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{post['title']}} | {{default_settings['BLOG_TITLE']}} | {{default_settings['BLOG_DESCRIPTION']}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="theme-color" content="#3F51B5">
 
-{% block body %}
+    <link rel="shortcut icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script>window.lazyScripts=[]</script>
+</head>
 
-<header class="top-header" id="header">
-    <div class="flex-row">
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
-            <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">{{ post['title'] }}</div>
+<body>
+<div id="loading" class="active"></div>
 
-        <div class="search-wrap" id="search-wrap">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
-                <i class="icon icon-lg icon-chevron-left"></i>
-            </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
-                <i class="icon icon-lg icon-search"></i>
-            </a>
-        </div>
+{%- block menu -%}{%- include 'menu.html' -%}{%- endblock -%}
 
+<main id="main">
+    {%- block top_head -%}{%- include 'top_head.html' -%}{%- endblock -%}
+    <header class="content-header post-header">
 
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
-            <i class="icon icon-lg icon-share-alt"></i>
-        </a>
+        <div class="container fade-scale">
+            <h1 class="title">{{post['title']}}</h1>
+            <h5 class="subtitle">
 
-    </div>
-</header>
-<header class="content-header post-header">
-
-    <div class="container fade-scale">
-        <h1 class="title">{{ post['title'] }}</h1>
-        <h5 class="subtitle">
-
-            <time datetime="{{ post['date'] |formatdate }}" itemprop="datePublished" class="page-time">
-                {{ post['date'] |formatdate }}
-            </time>
-
-
-        </h5>
-    </div>
-
-
-</header>
-
-
-<div class="container body-wrap">
-
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>TOC</h4>
-            {{ post['toc'] }}
-        </nav>
-    </aside>
-
-
-    <article id="post-hello-world"
-             class="post-article article-type-post fade" itemprop="blogPost">
-
-        <div class="post-card">
-            <h1 class="post-card-title">Hello World</h1>
-            <div class="post-meta">
-                <time class="post-time"  datetime="{{ post['date'] |formatdate }}"
-                      itemprop="datePublished">{{ post['date'] |formatdate1 }}
+                <time datetime="{{ post['date'] |formatdate }}" itemprop="datePublished" class="page-time">
+                    {{ post['date'] |formatdate }}
                 </time>
 
 
-            </div>
-
-            <div class="post-content" id="post-content" itemprop="postContent">
-
-                {{ post['body_md'] }}
-
-            </div>
-
-            <blockquote class="post-copyright">
-                <div class="content">
-
-<span class="post-time">
-    Last updated: <time datetime="{{ post['date'] |formatdate }}" itemprop="dateUpdated">{{ post['date'] |formatdate }}</time>
-</span><br>
-
-
-                    这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2017/05/09/hello-world/" target="_blank"
-                                                             rel="external">http://xsren.me/2017/05/09/hello-world/</a>
-
-                </div>
-                <footer>
-                    <a href="http://xsren.me">
-                        <img src="/img/avatar.jpg" alt="xsren">
-                        xsren
-                    </a>
-                </footer>
-            </blockquote>
-
-
-            <div class="page-reward">
-                <a id="rewardBtn" href="javascript:;"
-                   class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-            </div>
-
-
-            <div class="post-footer">
-
-                <ul class="article-tag-list">
-                    <li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/a/">a</a></li>
-                    <li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/b/">b</a></li>
-                    <li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/">c</a></li>
-                </ul>
-
-
-                <div class="page-share-wrap">
-
-
-                    <div class="page-share" id="pageShare">
-                        <ul class="reset share-icons">
-                            <li>
-                                <a class="weibo share-sns" target="_blank"
-                                   href="http://service.weibo.com/share/share.php?url=http://xsren.me/2017/05/09/hello-world/&title=《Hello World》 — 仁者无敌&pic=http://xsren.me/img/avatar.jpg"
-                                   data-title="微博">
-                                    <i class="icon icon-weibo"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-                                    <i class="icon icon-weixin"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="qq share-sns" target="_blank"
-                                   href="http://connect.qq.com/widget/shareqq/index.html?url=http://xsren.me/2017/05/09/hello-world/&title=《Hello World》 — 仁者无敌&source=xsren写作的地方"
-                                   data-title=" QQ">
-                                    <i class="icon icon-qq"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="facebook share-sns" target="_blank"
-                                   href="https://www.facebook.com/sharer/sharer.php?u=http://xsren.me/2017/05/09/hello-world/"
-                                   data-title=" Facebook">
-                                    <i class="icon icon-facebook"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="twitter share-sns" target="_blank"
-                                   href="https://twitter.com/intent/tweet?text=《Hello World》 — 仁者无敌&url=http://xsren.me/2017/05/09/hello-world/&via=http://xsren.me"
-                                   data-title=" Twitter">
-                                    <i class="icon icon-twitter"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="google share-sns" target="_blank"
-                                   href="https://plus.google.com/share?url=http://xsren.me/2017/05/09/hello-world/"
-                                   data-title=" Google+">
-                                    <i class="icon icon-google-plus"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-
-
-                    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-                        <i class="icon icon-share-alt icon-lg"></i>
-                    </a>
-                </div>
-
-
-            </div>
+            </h5>
         </div>
 
 
-        <nav class="post-nav flex-row flex-justify-between">
+    </header>
 
-            <div class="waves-block waves-effect prev">
-                <a href="/2017/05/11/Scrapy-组件执行顺序/" id="post-prev" class="post-nav-link">
-                    <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-                    <h4 class="title">Scrapy 组件执行顺序</h4>
-                </a>
+
+    <div class="container body-wrap">
+
+        <aside class="post-widget">
+            <nav class="post-toc-wrap" id="post-toc">
+                <h4>TOC</h4>
+                <ol class="post-toc">
+                    {{ post['toc'] }}
+                </ol>
+            </nav>
+        </aside>
+
+        <article id="post-{{post['title']}}"
+                 class="post-article article-type-post fade" itemprop="blogPost">
+
+            <div class="post-card">
+                <h1 class="post-card-title">{{post['title']}}</h1>
+                <div class="post-meta">
+                    <time class="post-time" datetime="{{ post['date'] |formatdate1 }}"
+                          itemprop="datePublished">{{ post['date'] |formatdate1 }}
+                    </time>
+
+
+                </div>
+                <div class="post-content" id="post-content" itemprop="postContent">
+                    {{ post['body_md'] }}
+                </div>
+
+                <blockquote class="post-copyright">
+                    <div class="content">
+
+<span class="post-time">
+    最后更新时间：<time datetime="{{ post['date'] |formatdate1 }}"
+                 itemprop="dateUpdated">{{ post['date'] |formatdate1 }}</time>
+</span><br>
+
+
+                        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2017/05/11/Scrapy-组件执行顺序/" target="_blank"
+                                                                 rel="external">http://xsren.me/2017/05/11/Scrapy-组件执行顺序/</a>
+
+                    </div>
+                    <footer>
+                        <a href="http://xsren.me">
+                            <img src="/static/img/avatar.jpg" alt="xsren">
+                            xsren
+                        </a>
+                    </footer>
+                </blockquote>
+
+
+                <div class="page-reward">
+                    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+                </div>
+
+
+                <div class="post-footer">
+
+                    <ul class="article-tag-list">
+                        <li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/a/">a</a></li>
+                        <li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/b/">b</a></li>
+                        <li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/">c</a></li>
+                    </ul>
+
+
+                    <div class="page-share-wrap">
+
+
+                        <div class="page-share" id="pageShare">
+                            <ul class="reset share-icons">
+                                <li>
+                                    <a class="weibo share-sns" target="_blank"
+                                       href="http://service.weibo.com/share/share.php?url=http://xsren.me/2017/05/11/Scrapy-组件执行顺序/&title=《Scrapy 组件执行顺序》 — 仁者无敌&pic=http://xsren.me/static/img/avatar.jpg"
+                                       data-title="微博">
+                                        <i class="icon icon-weibo"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+                                        <i class="icon icon-weixin"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="qq share-sns" target="_blank"
+                                       href="http://connect.qq.com/widget/shareqq/index.html?url=http://xsren.me/2017/05/11/Scrapy-组件执行顺序/&title=《Scrapy 组件执行顺序》 — 仁者无敌&source=xsren写作的地方"
+                                       data-title=" QQ">
+                                        <i class="icon icon-qq"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="facebook share-sns" target="_blank"
+                                       href="https://www.facebook.com/sharer/sharer.php?u=http://xsren.me/2017/05/11/Scrapy-组件执行顺序/"
+                                       data-title=" Facebook">
+                                        <i class="icon icon-facebook"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="twitter share-sns" target="_blank"
+                                       href="https://twitter.com/intent/tweet?text=《Scrapy 组件执行顺序》 — 仁者无敌&url=http://xsren.me/2017/05/11/Scrapy-组件执行顺序/&via=http://xsren.me"
+                                       data-title=" Twitter">
+                                        <i class="icon icon-twitter"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="google share-sns" target="_blank"
+                                       href="https://plus.google.com/share?url=http://xsren.me/2017/05/11/Scrapy-组件执行顺序/"
+                                       data-title=" Google+">
+                                        <i class="icon icon-google-plus"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+
+                        <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+                            <i class="icon icon-share-alt icon-lg"></i>
+                        </a>
+                    </div>
+
+
+                </div>
             </div>
 
 
-            <div class="waves-block waves-effect next">
-                <a href="/2017/05/09/hello-world/" id="post-next" class="post-nav-link">
-                    <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-                    <h4 class="title">Hello World</h4>
-                </a>
-            </div>
-
-        </nav>
+            <nav class="post-nav flex-row flex-justify-between flex-row-reverse">
 
 
-    </article>
+                <div class="waves-block waves-effect next">
+                    <a href="/2017/05/09/My-New-Post/" id="post-next" class="post-nav-link">
+                        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+                        <h4 class="title">My New Post</h4>
+                    </a>
+                </div>
 
-    <div id="reward" class="page-modal reward-lay">
-        <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-        <h3 class="reward-title">
-            <i class="icon icon-quote-left"></i>
-            谢谢支持~
-            <i class="icon icon-quote-right"></i>
-        </h3>
-        <ul class="reward-items">
-
-            <li>
-                <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
-                <p>微信</p>
-            </li>
+            </nav>
 
 
-            <li>
-                <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
-                <p>支付宝</p>
-            </li>
+        </article>
 
-        </ul>
+        <!--打赏-->
+        <div id="reward" class="page-modal reward-lay">
+            <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+            <h3 class="reward-title">
+                <i class="icon icon-quote-left"></i>
+                谢谢支持~
+                <i class="icon icon-quote-right"></i>
+            </h3>
+            <ul class="reward-items">
+
+                <li>
+                    <img src="/static/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+                    <p>微信</p>
+                </li>
+
+
+                <li>
+                    <img src="/static/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+                    <p>支付宝</p>
+                </li>
+
+            </ul>
+        </div>
     </div>
+    <!-- footer -->
+    {%- include 'footer.html' -%}
+</main>
 
+<div class="mask" id="mask"></div>
 
-</div>
-
-{% endblock %}
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span
+        class="icon icon-lg icon-chevron-up"></span></a>
+{%- block global_share -%}{%- include 'global_share.html' -%}{%- endblock -%}
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+</script>
+<script src="/static/js/main.js"></script>
+{%- block search -%}{%- include 'search.html' -%}{%- endblock -%}
+</body>
+</html>
