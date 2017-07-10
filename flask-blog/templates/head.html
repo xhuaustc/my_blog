@@ -1,12 +1,18 @@
 <head>
     <meta charset="utf-8">
+
     {%- if default_settings -%}
-        {%- if post -%}
-            <title>{{post['title']}} | {{default_settings['BLOG_TITLE']}} | {{default_settings['BLOG_DESCRIPTION']}}</title>
-        {%- else -%}
-            <title>{{default_settings['BLOG_TITLE']}} | {{default_settings['BLOG_DESCRIPTION']}}</title>
-        {%- endif -%}
+    {%- if post -%}
+    <title>{{post['title']}} | {{default_settings['BLOG_TITLE']}} | {{default_settings['BLOG_DESCRIPTION']}}</title>
+    {%- else -%}
+    <title>{{default_settings['BLOG_TITLE']}} | {{default_settings['BLOG_DESCRIPTION']}}</title>
     {%- endif -%}
+    {%- endif -%}
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="theme-color" content="#3F51B5">
+
     <link rel="shortcut icon" href="/static/img/favicon.ico">
-    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script>window.lazyScripts=[]</script>
 </head>

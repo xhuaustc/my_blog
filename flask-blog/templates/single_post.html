@@ -1,23 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>{{post['title']}} | {{default_settings['BLOG_TITLE']}} | {{default_settings['BLOG_DESCRIPTION']}}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="theme-color" content="#3F51B5">
-
-    <link rel="shortcut icon" href="/static/img/favicon.ico">
-    <link rel="stylesheet" href="/static/css/style.css">
-    <script>window.lazyScripts=[]</script>
-</head>
-
-<body>
-<div id="loading" class="active"></div>
-
-{%- block menu -%}{%- include 'menu.html' -%}{%- endblock -%}
+{% extends "base.html" %}
+{% block body %}
 
 <main id="main">
-    {%- block top_head -%}{%- include 'top_head.html' -%}{%- endblock -%}
+
     <header class="content-header post-header">
 
         <div class="container fade-scale">
@@ -197,20 +182,8 @@
             </ul>
         </div>
     </div>
-    <!-- footer -->
-    {%- include 'footer.html' -%}
+
 </main>
 
-<div class="mask" id="mask"></div>
 
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span
-        class="icon icon-lg icon-chevron-up"></span></a>
-{%- block global_share -%}{%- include 'global_share.html' -%}{%- endblock -%}
-<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-<script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
-</script>
-<script src="/static/js/main.js"></script>
-{%- block search -%}{%- include 'search.html' -%}{%- endblock -%}
-</body>
-</html>
+{% endblock %}
