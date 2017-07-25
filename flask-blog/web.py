@@ -1,8 +1,12 @@
 import cgi
 import os
 
+import mistune
 from flask import Flask, render_template, abort
+from flask import Markup
+from flask import jsonify
 from flaskext.markdown import Markdown
+from mistune_contrib.toc import TocMixin
 from werkzeug.contrib.atom import AtomFeed
 
 import pagination
@@ -14,6 +18,14 @@ from mdx_code_multiline import MultilineCodeExtension
 from mdx_github_gists import GitHubGistExtension
 from mdx_quote import QuoteExtension
 from mdx_strike import StrikeExtension
+
+
+class TocRenderer(TocMixin, mistune.Renderer):
+    pass
+
+
+toc = TocRenderer()
+md_show = mistune.Markdown(renderer=toc)
 
 app = Flask('FlaskBlog')
 md = Markdown(app)
@@ -47,16 +59,28 @@ def posts_by_tag(tag, page):
     return render_template('index.html', posts=posts['data'], pagination=pag, meta_title='Posts by tag: ' + tag)
 
 
+@app.route('/post/get_post_content/<permalink>')
+def get_post_content(permalink):
+    post = postClass.get_post_by_permalink(permalink)
+    if not post['data']:
+        return jsonify({'status': 1, 'info': 'post not exist'})
+    else:
+        return jsonify({'status': 0, 'info': 'ok', 'data': post['data']['body']})
+
+
 @app.route('/post/<permalink>')
 def single_post(permalink):
     post = postClass.get_post_by_permalink(permalink)
     if not post['data']:
         abort(404)
-    import markdown
-    from flask import Markup
-    md = markdown.Markdown(extensions=['markdown.extensions.toc'])
-    post['data']['body_md'] = Markup(md.convert(post['data']['body'])).replace('&quot;', '')
-    post['data']['toc'] = Markup(md.toc)
+
+    body = post['data']['body'].replace('&gt;', '>').replace('&quot;', '"')
+
+    toc.reset_toc()
+
+    post['data']['body_md'] = Markup(md_show.parse(body))
+    post['data']['toc'] = Markup(toc.render_toc(level=6))
+
     return render_template('single_post.html', post=post['data'], default_settings=app.config,
                            meta_title=app.config['BLOG_TITLE'] + '::' + post['data']['title'])
 
@@ -444,9 +468,11 @@ def set_globals():
 def page_not_found(error):
     return render_template('404.html', meta_title='404'), 404
 
+
 @app.template_filter('formatdate1')
 def format_datetime_filter1(input_value, format_="%Y-%m-%d"):
     return input_value.strftime(format_)
+
 
 @app.template_filter('formatdate')
 def format_datetime_filter(input_value, format_="%Y-%m-%d %H:%M:%S"):
