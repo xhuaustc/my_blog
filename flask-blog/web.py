@@ -1,7 +1,9 @@
+# coding:utf8
 import cgi
 import os
 
 import mistune
+from datetime import timedelta
 from flask import Flask, render_template, abort
 from flask import Markup
 from flask import jsonify
@@ -74,6 +76,11 @@ def single_post(permalink):
     if not post['data']:
         abort(404)
 
+    # get next post
+    next_post = postClass.get_next_post(post['data']['_id'])
+    # get pre post
+    pre_post = postClass.get_pre_post(post['data']['_id'])
+
     body = post['data']['body'].replace('&gt;', '>').replace('&quot;', '"')
 
     toc.reset_toc()
@@ -82,7 +89,9 @@ def single_post(permalink):
     post['data']['toc'] = Markup(toc.render_toc(level=6))
 
     return render_template('single_post.html', post=post['data'], default_settings=app.config,
-                           meta_title=app.config['BLOG_TITLE'] + '::' + post['data']['title'])
+                           meta_title=app.config['BLOG_TITLE'] + '::' + post['data']['title'],
+                           next_post=next_post,
+                           pre_post=pre_post)
 
 
 @app.route('/q/<query>', defaults={'page': 1})
@@ -349,10 +358,11 @@ def blog_settings():
     error_type = 'validate'
     if request.method == 'POST':
         blog_data = {
+            'host': request.form.get('blog-host', None),
             'title': request.form.get('blog-title', None),
             'description': request.form.get('blog-description', None),
             'per_page': request.form.get('blog-perpage', None),
-            'text_search': request.form.get('blog-text-search', None)
+            'text_search': 1#request.form.get('blog-text-search', None)
         }
         blog_data['text_search'] = 1 if blog_data['text_search'] else 0
         for key, value in blog_data.items():
@@ -471,11 +481,15 @@ def page_not_found(error):
 
 @app.template_filter('formatdate1')
 def format_datetime_filter1(input_value, format_="%Y-%m-%d"):
+    # 转换为北京时间
+    input_value += timedelta(hours=8)
     return input_value.strftime(format_)
 
 
 @app.template_filter('formatdate')
 def format_datetime_filter(input_value, format_="%Y-%m-%d %H:%M:%S"):
+    # 转换为北京时间
+    input_value += timedelta(hours=8)
     return input_value.strftime(format_)
 
 

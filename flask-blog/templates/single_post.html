@@ -1,39 +1,27 @@
 {% extends "base.html" %}
 {% block body %}
 
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-
 <main id="main">
 
     <header class="content-header post-header">
-
         <div class="container fade-scale">
             <h1 class="title">{{post['title']}}</h1>
             <h5 class="subtitle">
-
                 <time datetime="{{ post['date'] |formatdate }}" itemprop="datePublished" class="page-time">
                     {{ post['date'] |formatdate }}
                 </time>
-
-
             </h5>
         </div>
-
-
     </header>
 
-
     <div class="container body-wrap">
-
         <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-        <h4>TOC</h4>
-        <ol class="post-toc">
-        {{ post['toc'] }}
-        </ol>
-        </nav>
+            <nav class="post-toc-wrap" id="post-toc">
+                <h4>TOC</h4>
+                <ol class="post-toc">
+                {{ post['toc'] }}
+                </ol>
+            </nav>
         </aside>
 
         <article id="post-{{post['title']}}"
@@ -45,8 +33,6 @@
                     <time class="post-time" datetime="{{ post['date'] |formatdate1 }}"
                           itemprop="datePublished">{{ post['date'] |formatdate1 }}
                     </time>
-
-
                 </div>
                 <div class="post-content" id="post-content" itemprop="postContent">
                     {{post['body_md']|safe}}
@@ -55,20 +41,19 @@
                 <blockquote class="post-copyright">
                     <div class="content">
 
-<span class="post-time">
-    最后更新时间：<time datetime="{{ post['date'] |formatdate1 }}"
-                 itemprop="dateUpdated">{{ post['date'] |formatdate1 }}</time>
-</span><br>
+                <span class="post-time">
+                    最后更新时间：<time datetime="{{ post['update_date'] |formatdate }}"
+                                 itemprop="dateUpdated">{{ post['update_date'] |formatdate }}</time>
+                </span><br>
 
+                    原始链接：<a href="{{ url_for('single_post', permalink=post['permalink']) }}" target="_blank"
+                       rel="external">{{ default_settings['HOSTNAME'] }}{{ url_for('single_post', permalink=post['permalink']) }}</a>
 
-                        原始链接：<a href="/2017/05/11/Scrapy-组件执行顺序/" target="_blank"
-                               rel="external">http://xsren.me/2017/05/11/Scrapy-组件执行顺序/</a>
-
-                    </div>
+            </div>
                     <footer>
-                        <a href="http://xsren.me">
-                            <img src="/static/img/avatar.jpg" alt="xsren">
-                            xsren
+                        <a href="/">
+                            <img src="/static/img/avatar.jpg" alt="{{ post['author'] }}">
+                            {{ post['author'] }}
                         </a>
                     </footer>
                 </blockquote>
@@ -82,9 +67,11 @@
                 <div class="post-footer">
 
                     <ul class="article-tag-list">
-                        <li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/a/">a</a></li>
-                        <li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/b/">b</a></li>
-                        <li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/">c</a></li>
+                        {%- if post['tags'] -%}
+                            {%- for tag in post['tags'] -%}
+                            <li class="article-tag-list-item"><a class="article-tag-list-link" href="{{ url_for('posts_by_tag', tag=tag) }}">{{ tag }}</a></li>
+                            {%- endfor -%}
+                        {%- endif -%}
                     </ul>
 
 
@@ -95,7 +82,7 @@
                             <ul class="reset share-icons">
                                 <li>
                                     <a class="weibo share-sns" target="_blank"
-                                       href="http://service.weibo.com/share/share.php?url=http://xsren.me/2017/05/11/Scrapy-组件执行顺序/&title=《Scrapy 组件执行顺序》 — 仁者无敌&pic=http://xsren.me/static/img/avatar.jpg"
+                                       href="http://service.weibo.com/share/share.php?url={{ default_settings['HOSTNAME'] }}{{ url_for('single_post', permalink=post['permalink']) }}&title=《{{ post['title'] }}》 — {{ default_settings['BLOG_TITLE'] }}&pic={{ default_settings['HOSTNAME'] }}/static/img/avatar.jpg"
                                        data-title="微博">
                                         <i class="icon icon-weibo"></i>
                                     </a>
@@ -107,28 +94,28 @@
                                 </li>
                                 <li>
                                     <a class="qq share-sns" target="_blank"
-                                       href="http://connect.qq.com/widget/shareqq/index.html?url=http://xsren.me/2017/05/11/Scrapy-组件执行顺序/&title=《Scrapy 组件执行顺序》 — 仁者无敌&source=xsren写作的地方"
+                                       href="http://connect.qq.com/widget/shareqq/index.html?url={{ default_settings['HOSTNAME'] }}{{ url_for('single_post', permalink=post['permalink']) }}&title=《{{ post['title'] }}》 — {{ default_settings['BLOG_TITLE'] }} &source={{ default_settings['BLOG_DESCRIPTION'] }}"
                                        data-title=" QQ">
                                         <i class="icon icon-qq"></i>
                                     </a>
                                 </li>
                                 <li>
                                     <a class="facebook share-sns" target="_blank"
-                                       href="https://www.facebook.com/sharer/sharer.php?u=http://xsren.me/2017/05/11/Scrapy-组件执行顺序/"
+                                       href="https://www.facebook.com/sharer/sharer.php?u={{ default_settings['HOSTNAME'] }}{{ url_for('single_post', permalink=post['permalink']) }}"
                                        data-title=" Facebook">
                                         <i class="icon icon-facebook"></i>
                                     </a>
                                 </li>
                                 <li>
                                     <a class="twitter share-sns" target="_blank"
-                                       href="https://twitter.com/intent/tweet?text=《Scrapy 组件执行顺序》 — 仁者无敌&url=http://xsren.me/2017/05/11/Scrapy-组件执行顺序/&via=http://xsren.me"
+                                       href="https://twitter.com/intent/tweet?text=《{{ post['title'] }}》 — {{ default_settings['BLOG_TITLE'] }} &url={{ default_settings['HOSTNAME'] }}{{ url_for('single_post', permalink=post['permalink']) }}&via={{ default_settings['HOSTNAME'] }}"
                                        data-title=" Twitter">
                                         <i class="icon icon-twitter"></i>
                                     </a>
                                 </li>
                                 <li>
                                     <a class="google share-sns" target="_blank"
-                                       href="https://plus.google.com/share?url=http://xsren.me/2017/05/11/Scrapy-组件执行顺序/"
+                                       href="https://plus.google.com/share?url={{ default_settings['HOSTNAME'] }}{{ url_for('single_post', permalink=post['permalink']) }}"
                                        data-title=" Google+">
                                         <i class="icon icon-google-plus"></i>
                                     </a>
@@ -146,19 +133,41 @@
                 </div>
             </div>
 
-
+            {% if not pre_post%}
             <nav class="post-nav flex-row flex-justify-between flex-row-reverse">
 
-
+                {% if next_post %}
                 <div class="waves-block waves-effect next">
-                    <a href="/2017/05/09/My-New-Post/" id="post-next" class="post-nav-link">
-                        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-                        <h4 class="title">My New Post</h4>
-                    </a>
+                  <a href="{{ url_for('single_post', permalink=next_post['permalink']) }}" id="post-next" class="post-nav-link">
+                    <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+                    <h4 class="title">{{ next_post['title'] }}</h4>
+                  </a>
                 </div>
+                {% endif %}
 
             </nav>
 
+            {% else %}
+            <nav class="post-nav flex-row flex-justify-between">
+
+                <div class="waves-block waves-effect prev">
+                  <a href="{{ url_for('single_post', permalink=pre_post['permalink']) }}" id="post-prev" class="post-nav-link">
+                    <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 上一篇</div>
+                    <h4 class="title">{{ pre_post['title'] }}</h4>
+                  </a>
+                </div>
+
+                {% if next_post %}
+                <div class="waves-block waves-effect next">
+                  <a href="{{ url_for('single_post', permalink=next_post['permalink']) }}" id="post-next" class="post-nav-link">
+                    <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+                    <h4 class="title">{{ next_post['title'] }}</h4>
+                  </a>
+                </div>
+                {% endif %}
+
+            </nav>
+            {% endif %}
 
         </article>
 

@@ -10,6 +10,7 @@ class Settings:
         self.config['SEARCH'] = False
         self.config['BLOG_TITLE'] = 'Blog'
         self.config['BLOG_DESCRIPTION'] = ''
+        self.config['HOSTNAME'] = ''
 
         self.response = {'error': None, 'data': None}
         self.debug_mode = default_config['DEBUG']
@@ -26,6 +27,8 @@ class Settings:
                     'title', self.config['BLOG_TITLE'])
                 self.config['BLOG_DESCRIPTION'] = cursor.get(
                     'description', self.config['BLOG_DESCRIPTION'])
+                self.config['HOSTNAME'] = cursor.get(
+                    'host', self.config['HOSTNAME'])
             return self.config
         except Exception, e:
             self.print_debug_info(e, self.debug_mode)

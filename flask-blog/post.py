@@ -1,6 +1,8 @@
-import datetime
 import cgi
+import datetime
+
 from bson.objectid import ObjectId
+
 from helper_functions import *
 
 
@@ -58,6 +60,22 @@ class Post:
 
         return self.response
 
+    def get_next_post(self, post_id):
+        try:
+            post = self.collection.find({'_id': {'$lt': post_id}}).sort([('_id', -1)]).limit(1)
+            if post.count() > 0:
+                return post.next()
+        except Exception, e:
+            self.print_debug_info(e, self.debug_mode)
+
+    def get_pre_post(self, post_id):
+        try:
+            post = self.collection.find({'_id': {'$gt': post_id}}).sort([('_id', 1)]).limit(1)
+            if post.count() > 0:
+                return post.next()
+        except Exception, e:
+            self.print_debug_info(e, self.debug_mode)
+
     def get_post_by_id(self, post_id):
         self.response['error'] = None
         try:
@@ -107,6 +125,7 @@ class Post:
 
     def create_new_post(self, post_data):
         self.response['error'] = None
+        post_data['update_date'] = post_data['date']
         try:
             self.response['data'] = self.collection.insert(post_data)
         except Exception, e:
@@ -117,6 +136,7 @@ class Post:
 
     def edit_post(self, post_id, post_data):
         self.response['error'] = None
+        post_data['update_date'] = post_data['date']
         del post_data['date']
         del post_data['permalink']
 
