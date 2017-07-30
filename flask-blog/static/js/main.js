@@ -108,7 +108,18 @@
                 headerH = header.clientHeight,
                 titles = $('#post-content').querySelectorAll('h1, h2, h3, h4, h5, h6');
 
-            toc.querySelector('a[href="#' + titles[0].id + '"]').parentNode.classList.add('active');
+            try
+              {
+                toc.querySelector('a[href="#' + titles[0].id + '"]').parentNode.classList.add('active');
+              }
+            catch(err)
+              {
+                return {
+                    fixed: noop,
+                    actived: noop
+                }
+              }
+
 
             return {
                 fixed: function (top) {
@@ -409,7 +420,7 @@
         Blog.waterfall();
         var top = docEl.scrollTop;
         Blog.toc.fixed(top);
-        Blog.toc.actived(top);
+//        Blog.toc.actived(top);
         Blog.page.loaded();
     });
 
@@ -462,7 +473,7 @@
         Blog.toggleGotop(top);
         Blog.fixedHeader(top);
         Blog.toc.fixed(top);
-        Blog.toc.actived(top);
+//        Blog.toc.actived(top);
     }, false);
 
     if (w.BLOG.SHARE) {
