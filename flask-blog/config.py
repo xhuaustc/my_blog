@@ -1,5 +1,7 @@
-import pymongo
+# coding:utf8
 import os
+
+import pymongo
 
 CONNECTION_STRING = "mongodb://localhost"  # replace it with your settings
 CONNECTION = pymongo.MongoClient(CONNECTION_STRING)
@@ -34,3 +36,10 @@ else:
 LOG_FILE = "app.log"
 
 DEBUG = True  # set it to False on production
+
+HOMEPAGE = 'xsren.me'
+NICKNAME = 'xsren'
+GITHUB = 'https://github.com/xsren'
+EMAIL = 'bestrenxs@gmail.com'
+COPYRIGHT = u'xsren©2017'
+RECORD_NUM = u'鲁ICP备17027626号-1'

@@ -1,37 +1,37 @@
 {% if post %}
 <aside id="menu" class="hide">
-{% else %}
-<aside id="menu">
-    {% endif %}
-    <div class="inner flex-row-vertical">
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-            <i class="icon icon-lg icon-close"></i>
-        </a>
-        <div class="brand-wrap" style="background-image:url(/static/img/brand.jpg)">
-            <div class="brand">
-                <a href="/" class="avatar waves-effect waves-circle waves-light">
-                    <img src="/static/img/avatar.jpg"></a>
-                <hgroup class="introduce">
-                    <h5 class="nickname">xsren</h5>
-                    <a href="mailto:bestrenxs@gmail.com" title="bestrenxs@gmail.com"
-                       class="mail">bestrenxs@gmail.com</a></hgroup>
+    {% else %}
+    <aside id="menu">
+        {% endif %}
+        <div class="inner flex-row-vertical">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+                <i class="icon icon-lg icon-close"></i>
+            </a>
+            <div class="brand-wrap" style="background-image:url(/static/img/brand.jpg)">
+                <div class="brand">
+                    <a href="/" class="avatar waves-effect waves-circle waves-light">
+                        <img src="/static/img/avatar.jpg"></a>
+                    <hgroup class="introduce">
+                        <h5 class="nickname">{{ default_settings['NICKNAME'] }}</h5>
+                        <a href="mailto:{{ default_settings['EMAIL'] }}" title="{{ default_settings['EMAIL'] }}"
+                           class="mail">{{ default_settings['EMAIL'] }}</a></hgroup>
+                </div>
+            </div>
+            <div class="scroll-wrap flex-col">
+                <ul class="nav">
+                    <li class="waves-block waves-effect active">
+                        <a href="/">
+                            <i class="icon icon-lg icon-home"></i>主页</a>
+                    </li>
+                    <li class="waves-block waves-effect">
+                        <a href="/tags">
+                            <i class="icon icon-lg icon-tags"></i>Tags</a>
+                    </li>
+                    <li class="waves-block waves-effect">
+                        <a href="{{ default_settings['GITHUB'] }}" target="_blank">
+                            <i class="icon icon-lg icon-github"></i>Github</a>
+                    </li>
+                </ul>
             </div>
         </div>
-        <div class="scroll-wrap flex-col">
-            <ul class="nav">
-                <li class="waves-block waves-effect active">
-                    <a href="/">
-                        <i class="icon icon-lg icon-home"></i>主页</a>
-                </li>
-                <li class="waves-block waves-effect">
-                    <a href="/tags">
-                        <i class="icon icon-lg icon-tags"></i>Tags</a>
-                </li>
-                <li class="waves-block waves-effect">
-                    <a href="https://github.com/xsren" target="_blank">
-                        <i class="icon icon-lg icon-github"></i>Github</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</aside>
+    </aside>
