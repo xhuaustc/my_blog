@@ -13,10 +13,12 @@
 <main id="main">
     <!-- nav -->
     {% if post %}
-    {%- block top_head -%}{%- include 'top_head.html' -%}{%- endblock -%}
+    {%- block top_header_post -%}{%- include 'top_header_post.html' -%}{%- endblock -%}
     {% else %}
-    {%- block nav -%}{%- include 'nav.html' -%}{%- endblock -%}
+    {%- block top_header -%}{%- include 'top_header.html' -%}{%- endblock -%}
     {% endif %}
+
+    {%- block nav -%}{%- endblock -%}
 
     {% block body %} {% endblock %}
 

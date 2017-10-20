@@ -1,9 +1,9 @@
 # coding:utf8
 import cgi
 import os
+from datetime import timedelta
 
 import mistune
-from datetime import timedelta
 from flask import Flask, render_template, abort
 from flask import Markup
 from flask import jsonify
@@ -51,6 +51,7 @@ def index(page):
 
 @app.route('/tag/<tag>', defaults={'page': 1})
 @app.route('/tag/<tag>/page-<int:page>')
+@app.route('/tags', defaults={'tag': None, 'page': 1})
 def posts_by_tag(tag, page):
     skip = (page - 1) * int(app.config['PER_PAGE'])
     posts = postClass.get_posts(int(app.config['PER_PAGE']), skip, tag=tag)
@@ -58,7 +59,9 @@ def posts_by_tag(tag, page):
     if not posts['data']:
         abort(404)
     pag = pagination.Pagination(page, app.config['PER_PAGE'], count)
-    return render_template('index.html', posts=posts['data'], pagination=pag, meta_title='Posts by tag: ' + tag)
+
+    return render_template('tags.html', posts=posts['data'], pagination=pag,
+                           default_settings=app.config, tag=tag)
 
 
 @app.route('/post/get_post_content/<permalink>')
@@ -362,7 +365,7 @@ def blog_settings():
             'title': request.form.get('blog-title', None),
             'description': request.form.get('blog-description', None),
             'per_page': request.form.get('blog-perpage', None),
-            'text_search': 1#request.form.get('blog-text-search', None)
+            'text_search': 1  # request.form.get('blog-text-search', None)
         }
         blog_data['text_search'] = 1 if blog_data['text_search'] else 0
         for key, value in blog_data.items():

@@ -113,14 +113,13 @@ class Post:
             self.response['data'] = list(self.collection.aggregate([
                 {'$unwind': '$tags'},
                 {'$group': {'_id': '$tags', 'count': {'$sum': 1}}},
-                {'$sort': {'count': -1}},
-                {'$limit': 10},
+                {'$sort': {'_id': 1}},
+                # {'$limit': 10},
                 {'$project': {'title': '$_id', 'count': 1, '_id': 0}}
             ]))
         except Exception, e:
             self.print_debug_info(e, self.debug_mode)
             self.response['error'] = 'Get tags error..'
-
         return self.response
 
     def create_new_post(self, post_data):
