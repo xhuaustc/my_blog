@@ -1,7 +1,7 @@
 # my_blog
 My Blog.
 
-最近想搞一个自己的blog。自己想法是简介的UI+方便的管理。
+最近想搞一个自己的blog。自己想法是简单的UI+方便的管理。
 
 因为自己想学习flask就选了[flask-blog](https://github.com/dmaslov/flask-blog)。
 但是UI有点丑，就想到网上找UI模板。最后发现没有合适的。。
