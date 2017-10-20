@@ -4,6 +4,9 @@
     {%- if default_settings -%}
     {%- if post -%}
     <title>{{post['title']}} | {{default_settings['BLOG_TITLE']}} | {{default_settings['BLOG_DESCRIPTION']}}</title>
+    {% elif tag_title %}
+    <title>{{tag_title}} | {{default_settings['BLOG_TITLE']}} |
+        {{default_settings['BLOG_DESCRIPTION']}}</title>
     {%- else -%}
     <title>{{default_settings['BLOG_TITLE']}} | {{default_settings['BLOG_DESCRIPTION']}}</title>
     {%- endif -%}

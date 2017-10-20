@@ -46,7 +46,7 @@ def index(page):
     count = postClass.get_total_count()
     pag = pagination.Pagination(page, app.config['PER_PAGE'], count)
     return render_template('index.html', posts=posts['data'], pagination=pag, meta_title=app.config['BLOG_TITLE'],
-                           default_settings=app.config, )
+                           default_settings=app.config, is_in_home='active')
 
 
 @app.route('/tag/<tag>', defaults={'page': 1})
@@ -60,8 +60,13 @@ def posts_by_tag(tag, page):
         abort(404)
     pag = pagination.Pagination(page, app.config['PER_PAGE'], count)
 
+    if tag:
+        tag_title = 'Tags:{}'.format(tag)
+    else:
+        tag_title = 'tags'
+
     return render_template('tags.html', posts=posts['data'], pagination=pag,
-                           default_settings=app.config, tag=tag)
+                           default_settings=app.config, tag=tag, is_in_tags='active', tag_title=tag_title)
 
 
 @app.route('/post/get_post_content/<permalink>')
@@ -109,7 +114,8 @@ def search_results(page, query):
         posts['data'] = []
     count = postClass.get_total_count(search=query)
     pag = pagination.Pagination(page, app.config['PER_PAGE'], count)
-    return render_template('index.html', posts=posts['data'], pagination=pag, meta_title='Search results')
+    return render_template('index.html', posts=posts['data'], pagination=pag, meta_title='Search results',
+                           is_is_home="active")
 
 
 @app.route('/search', methods=['GET', 'POST'])
