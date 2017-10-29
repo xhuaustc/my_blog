@@ -46,7 +46,7 @@ def index(page):
     count = postClass.get_total_count()
     pag = pagination.Pagination(page, app.config['PER_PAGE'], count)
     return render_template('index.html', posts=posts['data'], pagination=pag, meta_title=app.config['BLOG_TITLE'],
-                           default_settings=app.config, is_in_home='active')
+                           is_in_home='active')
 
 
 @app.route('/tag/<tag>', defaults={'page': 1})
@@ -65,8 +65,8 @@ def posts_by_tag(tag, page):
     else:
         tag_title = 'tags'
 
-    return render_template('tags.html', posts=posts['data'], pagination=pag,
-                           default_settings=app.config, tag=tag, is_in_tags='active', tag_title=tag_title)
+    return render_template('tags.html', posts=posts['data'], pagination=pag, tag=tag, is_in_tags='active',
+                           tag_title=tag_title)
 
 
 @app.route('/post/get_post_content/<permalink>')
@@ -96,7 +96,7 @@ def single_post(permalink):
     post['data']['body_md'] = Markup(md_show.parse(body))
     post['data']['toc'] = Markup(toc.render_toc(level=6))
 
-    return render_template('single_post.html', post=post['data'], default_settings=app.config,
+    return render_template('single_post.html', post=post['data'],
                            meta_title=app.config['BLOG_TITLE'] + '::' + post['data']['title'],
                            next_post=next_post,
                            pre_post=pre_post)
@@ -114,7 +114,7 @@ def search_results(page, query):
         posts['data'] = []
     count = postClass.get_total_count(search=query)
     pag = pagination.Pagination(page, app.config['PER_PAGE'], count)
-    return render_template('index.html', posts=posts['data'], pagination=pag, meta_title='Search results',
+    return render_template('search_1.html', posts=posts['data'], pagination=pag, meta_title='Search results',
                            is_is_home="active")
 
 
@@ -387,7 +387,6 @@ def blog_settings():
                 return redirect(url_for('blog_settings'))
 
     return render_template('settings.html',
-                           default_settings=app.config,
                            meta_title='Settings',
                            error=error,
                            error_type=error_type)
@@ -452,7 +451,6 @@ def install():
             return redirect(url_for('index'))
 
     return render_template('install.html',
-                           default_settings=app.config,
                            error=error,
                            error_type=error_type,
                            meta_title='Install')
@@ -507,6 +505,7 @@ postClass = post.Post(app.config)
 userClass = user.User(app.config)
 
 app.jinja_env.globals['url_for_other_page'] = url_for_other_page
+app.jinja_env.globals['default_settings'] = app.config
 app.jinja_env.globals['meta_description'] = app.config['BLOG_DESCRIPTION']
 
 if not app.config['DEBUG']:

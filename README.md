@@ -9,3 +9,14 @@ My Blog.
 最后选择的是[hexo-theme-indigo](https://github.com/yscoder/hexo-theme-indigo)。
 
 方案定下来了，接下来就是开始开发了啊！
+
+
+————20171020 update————
+
+终于完成的差不多了。
+过程还是比较艰辛，通过这个项目熟悉了flask、jinja2还有前后端数据交换的过程。
+
+对前端还是不熟，其中有些功能还放弃了。
+
+但是自己对这个的效果不是很满意。先这样吧。
+
