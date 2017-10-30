@@ -30,7 +30,7 @@ class Settings:
                 self.config['HOSTNAME'] = cursor.get(
                     'host', self.config['HOSTNAME'])
             return self.config
-        except Exception, e:
+        except Exception as e:
             self.print_debug_info(e, self.debug_mode)
             self.response['error'] = 'System error..'
 

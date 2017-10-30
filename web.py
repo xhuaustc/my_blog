@@ -118,16 +118,16 @@ def search_results(page, query):
                            is_is_home="active")
 
 
-# @app.route('/search', methods=['GET', 'POST'])
-# def search():
-#     if request.method != 'POST':
-#         return redirect(url_for('index'))
-#
-#     query = request.form.get('query', None)
-#     if query:
-#         return redirect(url_for('search_results', query=query))
-#     else:
-#         return redirect(url_for('index'))
+@app.route('/search', methods=['GET', 'POST'])
+def search():
+    if request.method != 'POST':
+        return redirect(url_for('index'))
+
+    query = request.form.get('query', None)
+    if query:
+        return redirect(url_for('search_results', query=query))
+    else:
+        return redirect(url_for('index'))
 
 
 @app.route('/newpost', methods=['GET', 'POST'])
