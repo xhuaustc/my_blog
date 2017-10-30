@@ -114,20 +114,20 @@ def search_results(page, query):
         posts['data'] = []
     count = postClass.get_total_count(search=query)
     pag = pagination.Pagination(page, app.config['PER_PAGE'], count)
-    return render_template('search_1.html', posts=posts['data'], pagination=pag, meta_title='Search results',
+    return render_template('search_res.html', posts=posts['data'], pagination=pag, meta_title='Search results',
                            is_is_home="active")
 
 
-@app.route('/search', methods=['GET', 'POST'])
-def search():
-    if request.method != 'POST':
-        return redirect(url_for('index'))
-
-    query = request.form.get('query', None)
-    if query:
-        return redirect(url_for('search_results', query=query))
-    else:
-        return redirect(url_for('index'))
+# @app.route('/search', methods=['GET', 'POST'])
+# def search():
+#     if request.method != 'POST':
+#         return redirect(url_for('index'))
+#
+#     query = request.form.get('query', None)
+#     if query:
+#         return redirect(url_for('search_results', query=query))
+#     else:
+#         return redirect(url_for('index'))
 
 
 @app.route('/newpost', methods=['GET', 'POST'])
