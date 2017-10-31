@@ -3,3 +3,4 @@ flask-markdown
 pymongo>=3.0.3
 gunicorn
 mistune
+mistune-contrib

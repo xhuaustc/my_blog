@@ -1,6 +1,11 @@
 # my_blog
 My Blog.
 
+可以登录[我的博客](http://xsren.me),查看效果。
+
+![](http://ww1.sinaimg.cn/large/a0a52effly1fl1ffkldpmj228018kk12.jpg)
+
+
 最近想搞一个自己的blog。自己想法是简单的UI+方便的管理。
 
 因为自己想学习flask就选了[flask-blog](https://github.com/dmaslov/flask-blog)。
@@ -8,15 +13,61 @@ My Blog.
 最后找到了hexo的一些theme，发现可以生成静态文件，然后修改替换flask-blog的UI。
 最后选择的是[hexo-theme-indigo](https://github.com/yscoder/hexo-theme-indigo)。
 
-方案定下来了，接下来就是开始开发了啊！
+支持的python版本是python2
 
 
-————20171020 update————
+# 一、安装
 
-终于完成的差不多了。
-过程还是比较艰辛，通过这个项目熟悉了flask、jinja2还有前后端数据交换的过程。
+```
+git clone git@github.com:xsren/my_blog.git
+cd my_blog
+virtualenv --no-site-packages ./env
+source ./env/bin/activate
+pip install -r requirements.txt
+```
 
-对前端还是不熟，其中有些功能还放弃了。
+运行以上命令，然后更改config.py，主要是以下字段：
+```
+CONNECTION_STRING = "mongodb://localhost"  # replace it with your settings
+CONNECTION = pymongo.MongoClient(CONNECTION_STRING)
 
-但是自己对这个的效果不是很满意。先这样吧。
+.....
 
+HOMEPAGE = 'xsren.me'
+NICKNAME = 'xsren'
+GITHUB = 'https://github.com/xsren'
+EMAIL = 'bestrenxs@gmail.com'
+COPYRIGHT = u'xsren©2017'
+RECORD_NUM = u'鲁ICP备17027626号-1'
+
+```
+
+# 二、运行
+
+## 1、
+
+```
+python web.py
+
+```
+
+![](http://ww1.sinaimg.cn/large/a0a52effly1fl1f63gokfj21ok0gswkp.jpg)
+
+
+# 三、使用
+
+首次使访问进入install页面，可进行一些用户香港的配置，如下：
+
+![](http://ww1.sinaimg.cn/large/a0a52effly1fl1f7v3h0dj21040i0gmn.jpg)
+
+登录：
+![](http://ww1.sinaimg.cn/large/a0a52effly1fl1fajts0mj227m0qggnw.jpg)
+
+管理：
+![](http://ww1.sinaimg.cn/large/a0a52effly1fl1fblx7srj224a0uotce.jpg)
+
+发文：
+![](http://ww1.sinaimg.cn/large/a0a52effly1fl1fd19dozj220811wwhs.jpg)
+
+效果：
+![](http://ww1.sinaimg.cn/large/a0a52effly1fl1fdv78k4j2268182dlh.jpg)
