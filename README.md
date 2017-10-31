@@ -4,7 +4,7 @@ My Blog.
 可以登录[我的博客](http://xsren.me),查看效果。
 
 
-![0](http://ww1.sinaimg.cn/large/a0a52effly1fl1ffkldpmj228018kk12.jpg)
+![0](screenshots/主页.jpg)
 
 
 最近想搞一个自己的blog。自己想法是简单的UI+方便的管理。
@@ -52,26 +52,26 @@ python web.py
 
 ```
 
-![1](http://ww1.sinaimg.cn/large/a0a52effly1fl1f63gokfj21ok0gswkp.jpg)
+![1](screenshots/运行.jpg)
 
 
 # 三、使用
 
 首次使访问进入install页面，可进行一些用户香港的配置，如下：
 
-![2](http://ww1.sinaimg.cn/large/a0a52effly1fl1f7v3h0dj21040i0gmn.jpg)
+![2](screenshots/install.jpg)
 
 登录：
-![3](http://ww1.sinaimg.cn/large/a0a52effly1fl1fajts0mj227m0qggnw.jpg)
+![3](screenshots/login.jpg)
 
 管理：
 
-![4](http://ww1.sinaimg.cn/large/a0a52effly1fl1fblx7srj224a0uotce.jpg)
+![4](screenshots/管理.jpg)
 
 发文：
 
-![5](http://ww1.sinaimg.cn/large/a0a52effly1fl1fd19dozj220811wwhs.jpg)
+![5](screenshots/发文.jpg)
 
 效果：
 
-![6](http://ww1.sinaimg.cn/large/a0a52effly1fl1fdv78k4j2268182dlh.jpg)
+![6](screenshots/效果.jpg)
