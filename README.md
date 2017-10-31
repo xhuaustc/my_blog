@@ -51,23 +51,23 @@ python web.py
 
 ```
 
-![](http://ww1.sinaimg.cn/large/a0a52effly1fl1f63gokfj21ok0gswkp.jpg)
+![1](http://ww1.sinaimg.cn/large/a0a52effly1fl1f63gokfj21ok0gswkp.jpg)
 
 
 # 三、使用
 
 首次使访问进入install页面，可进行一些用户香港的配置，如下：
 
-![](http://ww1.sinaimg.cn/large/a0a52effly1fl1f7v3h0dj21040i0gmn.jpg)
+![2](http://ww1.sinaimg.cn/large/a0a52effly1fl1f7v3h0dj21040i0gmn.jpg)
 
 登录：
-![](http://ww1.sinaimg.cn/large/a0a52effly1fl1fajts0mj227m0qggnw.jpg)
+![3](http://ww1.sinaimg.cn/large/a0a52effly1fl1fajts0mj227m0qggnw.jpg)
 
 管理：
-![](http://ww1.sinaimg.cn/large/a0a52effly1fl1fblx7srj224a0uotce.jpg)
+![4](http://ww1.sinaimg.cn/large/a0a52effly1fl1fblx7srj224a0uotce.jpg)
 
 发文：
-![](http://ww1.sinaimg.cn/large/a0a52effly1fl1fd19dozj220811wwhs.jpg)
+![5](http://ww1.sinaimg.cn/large/a0a52effly1fl1fd19dozj220811wwhs.jpg)
 
 效果：
-![](http://ww1.sinaimg.cn/large/a0a52effly1fl1fdv78k4j2268182dlh.jpg)
+![6](http://ww1.sinaimg.cn/large/a0a52effly1fl1fdv78k4j2268182dlh.jpg)
