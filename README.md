@@ -3,7 +3,8 @@ My Blog.
 
 可以登录[我的博客](http://xsren.me),查看效果。
 
-![](http://ww1.sinaimg.cn/large/a0a52effly1fl1ffkldpmj228018kk12.jpg)
+
+![0](http://ww1.sinaimg.cn/large/a0a52effly1fl1ffkldpmj228018kk12.jpg)
 
 
 最近想搞一个自己的blog。自己想法是简单的UI+方便的管理。
@@ -64,10 +65,13 @@ python web.py
 ![3](http://ww1.sinaimg.cn/large/a0a52effly1fl1fajts0mj227m0qggnw.jpg)
 
 管理：
+
 ![4](http://ww1.sinaimg.cn/large/a0a52effly1fl1fblx7srj224a0uotce.jpg)
 
 发文：
+
 ![5](http://ww1.sinaimg.cn/large/a0a52effly1fl1fd19dozj220811wwhs.jpg)
 
 效果：
+
 ![6](http://ww1.sinaimg.cn/large/a0a52effly1fl1fdv78k4j2268182dlh.jpg)
