@@ -51,6 +51,7 @@ def index(page):
 
 @app.route('/tag/<tag>', defaults={'page': 1})
 @app.route('/tag/<tag>/page-<int:page>')
+@app.route('/tags/page-<int:page>')
 @app.route('/tags', defaults={'tag': None, 'page': 1})
 def posts_by_tag(tag, page):
     skip = (page - 1) * int(app.config['PER_PAGE'])
@@ -61,7 +62,7 @@ def posts_by_tag(tag, page):
     pag = pagination.Pagination(page, app.config['PER_PAGE'], count)
 
     if tag:
-        tag_title = 'Tags:{}'.format(tag)
+        tag_title = u'Tags:{}'.format(tag)
     else:
         tag_title = 'tags'
 

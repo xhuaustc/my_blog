@@ -59,7 +59,7 @@
                     {%- if post['preview'] -%}
                     {{ post['preview']|markdown }}
                     {%- else -%}
-                    {{ post['body']|markdown }}
+                    {{ post['body']|truncate|markdown }}
                     {%- endif -%}
                     <a href="{{ url_for('single_post', permalink=post['permalink']) }}"
                        class="post-more waves-effect waves-button">Continue reading...</a>
