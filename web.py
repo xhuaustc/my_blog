@@ -366,8 +366,6 @@ def recent_feed():
 def blog_settings():
     error = None
     error_type = 'validate'
-    import pdb
-    pdb.set_trace()
     if request.method == 'POST':
         blog_data = {
             'title': request.form.get('blog-title', None),
