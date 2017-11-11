@@ -53,7 +53,7 @@ def index(page):
 @app.route('/tag/<tag>/page-<int:page>')
 @app.route('/tags/page-<int:page>')
 @app.route('/tags', defaults={'tag': None, 'page': 1})
-def posts_by_tag(tag, page):
+def posts_by_tag(tag=None, page=1):
     skip = (page - 1) * int(app.config['PER_PAGE'])
     posts = postClass.get_posts(int(app.config['PER_PAGE']), skip, tag=tag)
     count = postClass.get_total_count(tag=tag)
@@ -366,9 +366,10 @@ def recent_feed():
 def blog_settings():
     error = None
     error_type = 'validate'
+    import pdb
+    pdb.set_trace()
     if request.method == 'POST':
         blog_data = {
-            'host': request.form.get('blog-host', None),
             'title': request.form.get('blog-title', None),
             'description': request.form.get('blog-description', None),
             'per_page': request.form.get('blog-perpage', None),
